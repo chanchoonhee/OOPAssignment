@@ -7,7 +7,11 @@ Xfatal-warnings=false
 Xfuture=false
 Xlog-implicits=false
 Xno-uescape=false
+<<<<<<< Updated upstream
 Xplugin=C\:\\Users\\yihuan laptop user\\Desktop\\OOP Assignment\\OOP Assignment\\paradise_2.12.2-2.1.0.jar
+=======
+Xplugin=C\:\\Users\\Nicholas\\Desktop\\OOP Assignment\\paradise_2.12.2-2.1.0.jar
+>>>>>>> Stashed changes
 Xplugin-disable=
 Xplugin-require=
 Xpluginsdir=misc\\scala-devel\\plugins
