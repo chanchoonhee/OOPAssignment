@@ -29,12 +29,12 @@ object MainApp extends JFXApp {
   val roots = loader.getRoot[jfxs.layout.BorderPane]
   // initialize stage
   stage = new PrimaryStage {
-    title = "AddressApp"
+    title = "Restaurant POS System" 
     scene = new Scene {
       root = roots
     }
   }
-  // actions for display person overview window 
+  // actions for display Main page window 
   def showMainPage() = {
     val resource = getClass.getResource("view/ManageMenu.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
@@ -42,6 +42,6 @@ object MainApp extends JFXApp {
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
   } 
-  // call to display PersonOverview when app start
+  // call to display MainPage when app start
   showMainPage()
 }
