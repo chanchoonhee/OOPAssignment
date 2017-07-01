@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="523.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.ManageMenuController">
+   <children>
+      <Button fx:id="handleAddMenu" layoutX="83.0" layoutY="127.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="handleEditMenu" layoutX="84.0" layoutY="218.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="handleDeleteMenu" layoutX="84.0" layoutY="324.0" mnemonicParsing="false" text="Delete" />
+      <TitledPane animated="false" layoutX="290.0" layoutY="14.0" prefHeight="257.0" prefWidth="455.0" text="Food">
+         <content>
+            <TableView fx:id="foodTable" prefHeight="225.0" prefWidth="478.0">
+              <columns>
+                <TableColumn fx:id="foodId" prefWidth="93.0" text="ID" />
+                  <TableColumn fx:id="foodName" prefWidth="136.0" text="Name" />
+                  <TableColumn fx:id="foodPrice" prefWidth="87.0" text="Price" />
+                  <TableColumn fx:id="foodCuisine" prefWidth="137.0" text="Cuisine" />
+              </columns>
+            </TableView>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" layoutX="290.0" layoutY="278.0" prefHeight="237.0" prefWidth="455.0" text="Drinks">
+         <content>
+            <TableView fx:id="drinksTable" prefHeight="205.0" prefWidth="590.0">
+               <columns>
+                  <TableColumn fx:id="drinksId" prefWidth="101.0" text="ID" />
+                  <TableColumn fx:id="drinksName" prefWidth="139.0" text="Name" />
+                  <TableColumn fx:id="drinksPrice" prefWidth="77.0" text="Price" />
+                  <TableColumn fx:id="drinksType" prefWidth="136.0" text="Type" />
+               </columns>
+            </TableView>
+         </content>
+      </TitledPane>
+   </children>
+</AnchorPane>

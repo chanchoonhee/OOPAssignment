@@ -1,7 +1,6 @@
-/*package ch.makery.address.model
+package ch.makery.address.model
 
-class Drinks extends Menu {
-  val menuId:Integer
+class Drinks(val menuId:Integer, var name:String, var price:Double, val drinkType:String){
  
   
-}*/
+}
