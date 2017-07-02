@@ -1,10 +1,12 @@
 package ch.makery.address.model
-import scalafx.beans.property.{StringProperty, IntegerProperty, DoubleProperty, ObjectProperty}
+
+import scalafx.beans.property.StringProperty
+
 
 abstract class Menu {
-  val menuId:Integer
-  var name:String
-  var price:Double 
+  val menuId:StringProperty
+  var name:StringProperty
+  var price:StringProperty
   
 
   

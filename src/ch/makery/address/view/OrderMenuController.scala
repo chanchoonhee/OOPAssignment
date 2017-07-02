@@ -1,5 +1,5 @@
 package ch.makery.address.view
 
-class OderMenuController {
+class OrderMenuController {
   
 }

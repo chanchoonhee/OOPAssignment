@@ -11,7 +11,7 @@ object DrinkDao extends App{
     
      val bw = new BufferedWriter(new FileWriter("drinks.csv"))
      for(items <- MainApp.drinks){
-     var values = (items.menuId+","+items.name+","+items.price+","+items.drinkType+" ")
+     var values = (items.menuId.value.toInt+","+items.name.value+","+items.price.value.toDouble+","+items.drinkType.value+" ")
      bw.write(s"$values \n")
      print(values)
   }

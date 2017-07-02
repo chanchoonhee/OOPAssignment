@@ -11,7 +11,7 @@ object FoodDao extends App{
     
      val bw = new BufferedWriter(new FileWriter("Food.csv"))
      for(items <- MainApp.food){
-     var values = (items.menuId+","+items.name+","+items.price+","+items.cuisine+" ")
+     var values = (items.menuId.value.toInt+","+items.name.value+","+items.price.value.toDouble+","+items.cuisine.value+" ")
      bw.write(s"$values \n")
      print(values)
   }
@@ -30,7 +30,7 @@ object FoodDao extends App{
       val cols = line.split(",").map(_.trim)
       id = cols(0).toInt
       price=cols(2).toDouble
-//      MainApp.food += new Food(id,cols(1),price,cols(3))
+      MainApp.food += new Food(id,cols(1),price,cols(3))
       
     } 
       bufferedSource.close

@@ -11,13 +11,8 @@ import ch.makery.address.model.{Food,Drinks,DrinkDao,FoodDao}
 
 object MainApp extends JFXApp {
   var drinks = ObservableBuffer[Drinks]()
-    drinks += new Drinks(8,"Iced Lemon Tea", 5.00, "Cold")
-    drinks += new Drinks(9,"Iced Tea", 2.00, "Cold")
-  val food = new ObservableBuffer[Food]()
-    food += new Food(1,"Chicken Burger",8.90,"Western")
-    food += new Food(2,"Steam Fish",30.90,"Chinese")
-    food += new Food(3,"Biscuit",0.99,"Western")
-
+  var food = new ObservableBuffer[Food]()
+   
 
   // transform path of RootLayout.fxml to URI for resource location.
   val rootResource = getClass.getResource("view/RootLayout.fxml")
@@ -28,12 +23,10 @@ object MainApp extends JFXApp {
 
   // retrieve the root component BorderPane from the FXML 
   val roots = loader.getRoot[jfxs.layout.BorderPane]
-     
-  DrinkDao.writeToFile()
-  FoodDao.writeToFile()
    DrinkDao.readFromCsv()
    FoodDao.readFromCsv()
- 
+  DrinkDao.writeToFile()
+  FoodDao.writeToFile()
   // initialize stage
   stage = new PrimaryStage {
     title = "Restaurant POS System" 
