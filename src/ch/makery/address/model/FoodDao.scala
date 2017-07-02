@@ -30,7 +30,7 @@ object FoodDao extends App{
       val cols = line.split(",").map(_.trim)
       id = cols(0).toInt
       price=cols(2).toDouble
-      MainApp.food += new Food(id,cols(1),price,cols(3))
+//      MainApp.food += new Food(id,cols(1),price,cols(3))
       
     } 
       bufferedSource.close

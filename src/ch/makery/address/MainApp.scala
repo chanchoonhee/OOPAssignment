@@ -44,12 +44,20 @@ object MainApp extends JFXApp {
   }
   // actions for display Main page window 
   def showMainPage() = {
-    val resource = getClass.getResource("view/ManageMenu.fxml")
+    val resource = getClass.getResource("view/MainPage.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
   } 
+  
+  def showManageMenuPage() = {
+    val resource = getClass.getResource("view/ManageMenu.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
+  }
 //   call to display MainPage when app start
   showMainPage()
   

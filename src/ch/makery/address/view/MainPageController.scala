@@ -7,7 +7,7 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class MainPageController {
   def handleManageMenu(action : ActionEvent)={
-    
+    MainApp.showManageMenuPage
   }
   
   def handleExit(action : ActionEvent)={

@@ -3,10 +3,11 @@ import scalafx.Includes._
 import ch.makery.address.MainApp
 import scalafx.event.ActionEvent
 import scalafx.scene.control.{TableView, TableColumn, Label, Alert}
-import scalafx.beans.property.{StringProperty} 
 import scalafxml.core.macros.sfxml
 import ch.makery.address.model.Food
 import ch.makery.address.model.Drinks
+import scalafx.beans.property.{StringProperty, IntegerProperty, DoubleProperty, ObjectProperty}
+
 
 @sfxml
 class ManageMenuController(
@@ -30,11 +31,16 @@ class ManageMenuController(
     
     private val drinksType : TableColumn[Drinks, String]
     ){
-  //foodTable.items = MainApp.foodData
-  //foodId.cellValueFactory = {1,1}
-  //drinksTable.items = MainApp.drinksData
+  foodTable.items = MainApp.food
+  
+  //foodId.cellValueFactory = {_.value.menuId}
+//  foodName.cellValueFactory = {_.value.name}
+  //foodPrice.cellValueFactory = {_.value.price}
+//  foodCuisine.cellValueFactory = {_.value.cuisine}
+  drinksTable.items = MainApp.drinks
+  //drinksName.cellValueFactory = {_.value.name}
+  
   def handleAddMenu(action : ActionEvent)={
-    print("to be done")
   }
   
   def handleEditMenu(action : ActionEvent)={
