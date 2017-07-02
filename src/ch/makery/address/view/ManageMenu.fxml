@@ -5,12 +5,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
 
 <AnchorPane prefHeight="523.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.ManageMenuController">
    <children>
-      <Button fx:id="handleAddMenu" layoutX="83.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleAddMenu" text="Add" />
-      <Button fx:id="handleEditMenu" layoutX="84.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleEditMenu" text="Edit" />
-      <Button fx:id="handleDeleteMenu" layoutX="84.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleDeleteMenu" text="Delete" />
+      <VBox layoutX="83.0" layoutY="127.0" spacing="50.0">
+         <children>
+            <Button fx:id="handleAddMenu" mnemonicParsing="false" onAction="#handleAddMenu" prefHeight="25.0" prefWidth="51.0" text="Add" />
+            <Button fx:id="handleEditMenu" mnemonicParsing="false" onAction="#handleEditMenu" prefHeight="25.0" prefWidth="51.0" text="Edit" />
+            <Button fx:id="handleDeleteMenu" mnemonicParsing="false" onAction="#handleDeleteMenu" text="Delete" />
+         </children>
+      </VBox>
       <TitledPane animated="false" layoutX="290.0" layoutY="14.0" prefHeight="257.0" prefWidth="455.0" text="Food">
          <content>
             <TableView fx:id="foodTable" prefHeight="225.0" prefWidth="478.0">
@@ -35,5 +41,6 @@
             </TableView>
          </content>
       </TitledPane>
+      <Button layoutX="14.0" layoutY="484.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Cancel" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" />
    </children>
 </AnchorPane>

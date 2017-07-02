@@ -6,16 +6,15 @@ import scalafxml.core.macros.sfxml
 
 @sfxml
 class MainPageController {
+  
+  //leads to login page
   def handleManageMenu(action : ActionEvent)={
     MainApp.showManageMenuPage
   }
   
-  def handleExit(action : ActionEvent)={
-    
+  def handleOrder(action : ActionEvent)={
+    MainApp.showOrderMenu
   }
   
-  def handleOrder(action : ActionEvent)={
-    
-  }
 }// end of class
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="136.0" layoutY="22.0" text="Quantity" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="76.0" layoutY="75.0" prefHeight="65.0" prefWidth="149.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
