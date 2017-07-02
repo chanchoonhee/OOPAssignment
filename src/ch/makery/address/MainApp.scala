@@ -6,32 +6,40 @@ import scalafx.Includes._
 import scalafxml.core.{NoDependencyResolver, FXMLLoader}
 import javafx.{scene => jfxs}
 import scalafx.collections.{ObservableBuffer}
-import ch.makery.address.model.Food
-import ch.makery.address.model.Drinks
+import ch.makery.address.model.{Food,Drinks,DrinkDao,FoodDao}
+
 
 object MainApp extends JFXApp {
-  
-  val foodData = new ObservableBuffer[Food]()
-    foodData += new Food(1,"Chicken Burger",8.90,"Western")
-    foodData += new Food(2,"Steam Fish",30.90,"Chinese")
-    foodData += new Food(3,"Biscuit",0.99,"Western")
-  val drinksData = new ObservableBuffer[Drinks]()
-    drinksData += new Drinks(1,"Orange Juice", 4, "TT")
-    drinksData += new Drinks(1,"Watermelon Juice", 6, "GG")
-    drinksData += new Drinks(1,"Guava Juice", 5, "DD")
+  var drinks = ObservableBuffer[Drinks]()
+    drinks += new Drinks(8,"Iced Lemon Tea", 5.00, "Cold")
+    drinks += new Drinks(9,"Iced Tea", 2.00, "Cold")
+  val food = new ObservableBuffer[Food]()
+    food += new Food(1,"Chicken Burger",8.90,"Western")
+    food += new Food(2,"Steam Fish",30.90,"Chinese")
+    food += new Food(3,"Biscuit",0.99,"Western")
+
+
   // transform path of RootLayout.fxml to URI for resource location.
   val rootResource = getClass.getResource("view/RootLayout.fxml")
   // initialize the loader object.
   val loader = new FXMLLoader(rootResource, NoDependencyResolver)
   // Load root layout from fxml file.
   loader.load();
+
   // retrieve the root component BorderPane from the FXML 
   val roots = loader.getRoot[jfxs.layout.BorderPane]
+     
+  DrinkDao.writeToFile()
+  FoodDao.writeToFile()
+   DrinkDao.readFromCsv()
+   FoodDao.readFromCsv()
+ 
   // initialize stage
   stage = new PrimaryStage {
     title = "Restaurant POS System" 
     scene = new Scene {
-      root = roots
+      root = roots    
+     
     }
   }
   // actions for display Main page window 
@@ -42,6 +50,11 @@ object MainApp extends JFXApp {
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
   } 
-  // call to display MainPage when app start
+//   call to display MainPage when app start
   showMainPage()
+  
+
+  
+
+  
 }
