@@ -63,7 +63,7 @@ class ManageMenuController(
       case Some("Food") => MainApp.showAddFood
       case Some("Drink") => MainApp.showAddDrinks
     }
-  }
+  }// end of handleAdd
   
   def handleEditMenu(action : ActionEvent)={
     val selectedMenuItem = foodTable.selectionModel().selectedItem.value
