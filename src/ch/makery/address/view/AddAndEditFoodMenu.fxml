@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.AddMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.AddAndEditFoodMenuController">
    <children>
       <Label layoutX="256.0" layoutY="21.0" text="AddMenu">
          <font>
             <Font size="20.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="menuType" layoutX="200.0" layoutY="93.0" prefWidth="150.0" />
-      <Label layoutX="102.0" layoutY="95.0" prefHeight="21.0" prefWidth="47.0" text="Type :">
-         <font>
-            <Font size="15.0" />
          </font>
       </Label>
       <TextArea fx:id="id" layoutX="200.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="200.0">

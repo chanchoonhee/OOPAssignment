@@ -10,42 +10,40 @@ import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
 
 @sfxml
-class AddMenuController(
+class AddAndEditDrinksMenuController(
     private val idField : TextField,
     private val    nameField  : TextField,
     private val   priceField  : TextField,
-    private val cuisineField  : TextField,
-    private val menuType: ChoiceBox[String]
+    private val typeField  : TextField
 	){
- menuType.items = ObservableBuffer("Food","Drinks")
-  var         AddMenuStage : Stage  = null
-  private var _menu     : Menu = null
+  var         AddDrinksStage : Stage  = null
+  private var _drinks     : Drinks = null
   var         okClicked            = false
 
-  def Menu = _menu
-  def Menu_=(x : Menu) {
-        _menu = x
+  def Drinks = _drinks
+  def Drinks_=(x : Drinks) {
+        _drinks = x
          
-        idField.text = _menu.menuId.value
-        nameField.text = _menu.name.value
-        priceField.text = _menu.price.toString
-//      cuisineField.text = _menu.cuisine.value
+        idField.text = _drinks.menuId.value
+        nameField.text = _drinks.name.value
+        priceField.text = _drinks.price.toString
+//      cuisineField.text = _drinks.cuisine.value
   }
 
   def handleOk(action :ActionEvent){
 
      if (isInputValid()) {
-    _menu.menuId       <== idField.text
-	_menu.name    <== nameField.text
-	_menu.price    <== priceField.text
-//	_menu.cuisine  <== cuisineField.text
+    _drinks.menuId       <== idField.text
+	_drinks.name    <== nameField.text
+	_drinks.price    <== priceField.text
+//	_drinks.cuisine  <== cuisineField.text
        
         okClicked = true;
-        AddMenuStage.close()
+        AddDrinksStage.close()
     }
   }
    def handleCancel(action :ActionEvent) {
-        AddMenuStage.close();
+        AddDrinksStage.close();
   }
   def nullChecking (x : String) = x == null || x.length == 0
 
@@ -65,7 +63,7 @@ class AddMenuController(
     } else {
         // Show the error message.
         val alert = new Alert(Alert.AlertType.Error){
-          initOwner(AddMenuStage)
+          initOwner(AddDrinksStage)
           title = "Invalid Fields"
           headerText = "Please correct invalid fields"
           contentText = errorMessage

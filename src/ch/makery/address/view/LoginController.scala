@@ -20,13 +20,13 @@ class LoginController (
   def handleLogin (action: ActionEvent){
     print(userIDField.text.value)
     print(passwordField.text.value)
-  if(!userIDField.text.value.equals(null) && !passwordField.text.value.equals(null)){
-    if (userIDField.text.value.equals("admin") && passwordField.text.value.equals("abc123")){
+//  if(!userIDField.text.value.equals(null) && !passwordField.text.value.equals(null)){
+//    if (userIDField.text.value.equals("admin") && passwordField.text.value.equals("abc123")){
       print("Hello World")
       MainApp.showManageMenuPage()
      
-  }
-  }
+//  }
+//  }
       }
   //when cancel is clicked -> lead back to main page
   def handleCancel(action: ActionEvent){

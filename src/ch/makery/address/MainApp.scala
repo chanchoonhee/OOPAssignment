@@ -6,7 +6,9 @@ import scalafx.Includes._
 import scalafxml.core.{NoDependencyResolver, FXMLLoader}
 import javafx.{scene => jfxs}
 import scalafx.collections.{ObservableBuffer}
-import ch.makery.address.model.{Food,Drinks,DrinkDao,FoodDao}
+import ch.makery.address.view.{AddAndEditFoodMenuController, AddAndEditDrinksMenuController}
+import scalafx.stage.{ Stage, Modality }
+import ch.makery.address.model.{Food,Drinks,Menu,DrinkDao,FoodDao}
 
 
 object MainApp extends JFXApp {
@@ -71,7 +73,23 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
   
-    def showAddMenu() = {
+  def showAddAndEditFoodMenu() = {
+    val resource = getClass.getResource("view/AddAndEditDrinksMenu.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
+  }
+  
+  def showAddAndEditDrinksMenu() = {
+    val resource = getClass.getResource("view/AddAndEditDrinksMenu.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
+  }
+  
+  def showAddMenu() = {
     val resource = getClass.getResource("view/AddMenu.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();

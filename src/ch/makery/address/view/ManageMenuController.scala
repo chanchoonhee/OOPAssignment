@@ -7,6 +7,9 @@ import scalafxml.core.macros.sfxml
 import ch.makery.address.model.Food
 import ch.makery.address.model.Drinks
 import scalafx.beans.property.StringProperty
+import scalafx.scene.control.ChoiceDialog
+import scalafx.stage.Stage
+
 @sfxml
 class ManageMenuController(
     private val foodTable : TableView[Food],
@@ -30,6 +33,7 @@ class ManageMenuController(
     private val drinksType : TableColumn[Drinks, String]
     ){
   
+  var stage : Stage = null
   
   foodTable.items = MainApp.food
   foodId.cellValueFactory = {_.value.menuId}
@@ -43,13 +47,34 @@ class ManageMenuController(
   drinksPrice.cellValueFactory = {_.value.price}
   drinksType.cellValueFactory = {_.value.drinkType}
 
+  def chooseMenuType() = {
+    val types = Seq("Food", "Drinks")
+    val dialog = new ChoiceDialog(defaultChoice = "Food", choices = types){
+      initOwner(stage)
+      title = "Menu Type"
+      contentText = "Choose menu type."
+    }
+    
+    val result = dialog.showAndWait()
+    
+    result match{
+      case Some(choice) => foodOrDrinks(choice)
+    }
+  }
+  
+  def foodOrDrinks(choice: String)= {
+    if(choice == "Food")
+      MainApp.showAddAndEditFoodMenu
+    else
+      MainApp.showAddAndEditDrinksMenu
+  }
+  
   def handleAddMenu(action : ActionEvent)={
-    MainApp.showAddMenu()
+    chooseMenuType
   }
   
   def handleEditMenu(action : ActionEvent)={
-    val selectedMenuItem = foodTable.selectionModel().selectedItem.value
-    print(selectedMenuItem)
+    MainApp.showAddMenu
   }
   
   def handleDeleteMenu(action : ActionEvent)={
