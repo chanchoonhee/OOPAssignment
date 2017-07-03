@@ -44,6 +44,7 @@ class ManageMenuController(
   drinksType.cellValueFactory = {_.value.drinkType}
 
   def handleAddMenu(action : ActionEvent)={
+    MainApp.showAddMenu()
   }
   
   def handleEditMenu(action : ActionEvent)={

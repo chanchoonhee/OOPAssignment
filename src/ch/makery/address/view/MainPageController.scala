@@ -9,7 +9,7 @@ class MainPageController {
   
   //leads to login page
   def handleManageMenu(action : ActionEvent)={
-    MainApp.showManageMenuPage
+    MainApp.showLoginPage
   }
   
   def handleOrder(action : ActionEvent)={

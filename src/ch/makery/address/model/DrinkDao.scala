@@ -11,7 +11,7 @@ object DrinkDao extends App{
     
      val bw = new BufferedWriter(new FileWriter("drinks.csv"))
      for(items <- MainApp.drinks){
-     var values = (items.menuId.value.toInt+","+items.name.value+","+items.price.value.toDouble+","+items.drinkType.value+" ")
+     var values = (items.menuId.value+","+items.name.value+","+items.price.value.toDouble+","+items.drinkType.value+" ")
      bw.write(s"$values \n")
      print(values)
   }
@@ -21,16 +21,12 @@ object DrinkDao extends App{
     
 
     def readFromCsv(){
-     
-      var id:Integer = 0
-      var price:Double = 0.00
-      val bufferedSource = io.Source.fromFile("drinks.csv")
-      
+     var price:Double = 0.00
+     val bufferedSource = io.Source.fromFile("drinks.csv")
       for(line <- bufferedSource.getLines){
       val cols = line.split(",").map(_.trim)
-      id = cols(0).toInt
       price=cols(2).toDouble
-      MainApp.drinks += new Drinks(id,cols(1),price,cols(3))
+      new Food(cols(0),cols(1),price,cols(3))
       
     } 
       bufferedSource.close

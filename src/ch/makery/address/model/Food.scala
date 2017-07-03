@@ -2,7 +2,7 @@
 package ch.makery.address.model
 
 import scalafx.beans.property.StringProperty
-class Food(val menuIdS:Integer ,var nameS:String ,var priceS:Double ,val cuisineS:String ) extends Menu {
+class Food(val menuIdS:String ,var nameS:String ,var priceS:Double ,val cuisineS:String ) extends Menu {
 
 val menuId= StringProperty(menuIdS.toString)
 var name= new StringProperty(nameS)
