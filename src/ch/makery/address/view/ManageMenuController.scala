@@ -9,6 +9,7 @@ import ch.makery.address.model.Food
 import ch.makery.address.model.Drinks
 import scalafx.beans.property.StringProperty
 import scalafx.stage.Window
+
 @sfxml
 class ManageMenuController(
     private val foodTable : TableView[Food],
@@ -59,8 +60,8 @@ class ManageMenuController(
     val result = dialog.showAndWait()
     
     result match{
-      case Some("Food") => MainApp.showAddMenu
-      case Some("Drink") => MainApp.showAddMenu
+      case Some("Food") => MainApp.showAddFood
+      case Some("Drink") => MainApp.showAddDrinks
     }
   }
   

@@ -71,8 +71,16 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
   
-    def showAddMenu() = {
-    val resource = getClass.getResource("view/AddMenu.fxml")
+    def showAddFood() = {
+    val resource = getClass.getResource("view/AddFood.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
+  }
+    
+    def showAddDrinks() = {
+    val resource = getClass.getResource("view/AddDrink.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]

@@ -1,60 +1,60 @@
 package ch.makery.address.view
 import ch.makery.address.MainApp
-import scalafx.scene.control.{TextField, TableColumn, Label, Alert, ChoiceBox}
+import scalafx.scene.control.{TextField, TableColumn, Label, Alert}
 import scalafxml.core.macros.sfxml
 import scalafx.stage.Stage
 import scalafx.Includes._
-import ch.makery.address.model.{Menu,Drinks,Food}
+import ch.makery.address.model.{Food,Drinks}
 import scalafx.collections.ObservableBuffer
 
 import scalafx.event.ActionEvent
 
 @sfxml
-class AddMenuController(
-    private val idField : TextField,
-    private val    nameField  : TextField,
-    private val   priceField  : TextField,
+class AddFoodController (
+    private val foodIDField : TextField,
+    private val    foodNameField  : TextField,
+    private val   foodPriceField  : TextField,
     private val cuisineField  : TextField
 	){
-  var         AddMenuStage : Stage  = null
-  private var _menu     : Menu = null
+  var         AddFoodStage : Stage  = null
+  private var _food     : Food = null
   var         okClicked            = false
 
-  def Menu = _menu
-  def Menu_=(x : Menu) {
-        _menu = x
+  def Food = _food
+  def Food_=(x : Food) {
+        _food = x
          
-        idField.text = _menu.menuId.value
-        nameField.text = _menu.name.value
-        priceField.text = _menu.price.toString
-//      cuisineField.text = _menu.cuisine.value
+        foodIDField.text = _food.menuId.value
+        foodNameField.text = _food.name.value
+        foodPriceField.text = _food.price.toString
+//      cuisineField.text = _food.cuisine.value
   }
 
   def handleOk(action :ActionEvent){
 
      if (isInputValid()) {
-    _menu.menuId       <== idField.text
-	_menu.name    <== nameField.text
-	_menu.price    <== priceField.text
-//	_menu.cuisine  <== cuisineField.text
+    _food.menuId       <== foodIDField.text
+	_food.name    <== foodNameField.text
+	_food.price    <== foodPriceField.text
+//	_food.cuisine  <== cuisineField.text
        
         okClicked = true;
-        AddMenuStage.close()
+        AddFoodStage.close()
     }
   }
    def handleCancel(action :ActionEvent) {
-        AddMenuStage.close();
+        AddFoodStage.close();
   }
   def nullChecking (x : String) = x == null || x.length == 0
 
   def isInputValid() : Boolean = {
     var errorMessage = ""
 
-    if (nullChecking(idField.text.value))
+    if (nullChecking(foodIDField.text.value))
       errorMessage += "No valid ID!\n"
-    if (nullChecking(nameField.text.value))
+    if (nullChecking(foodNameField.text.value))
       errorMessage += "No valid name!\n"
-    if (nullChecking(priceField.text.toString))
+    if (nullChecking(foodPriceField.text.toString))
       errorMessage += "No valid price!\n"
 //    if (nullChecking(cuisineField.text.value))
 //      errorMessage += "No valid cuisine!\n"
@@ -63,7 +63,7 @@ class AddMenuController(
     } else {
         // Show the error message.
         val alert = new Alert(Alert.AlertType.Error){
-          initOwner(AddMenuStage)
+          initOwner(AddFoodStage)
           title = "Invalid Fields"
           headerText = "Please correct invalid fields"
           contentText = errorMessage
@@ -74,3 +74,6 @@ class AddMenuController(
     }
     
    }
+
+
+  
