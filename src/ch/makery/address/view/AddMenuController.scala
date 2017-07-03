@@ -14,10 +14,8 @@ class AddMenuController(
     private val idField : TextField,
     private val    nameField  : TextField,
     private val   priceField  : TextField,
-    private val cuisineField  : TextField,
-    private val menuType: ChoiceBox[String]
+    private val cuisineField  : TextField
 	){
- menuType.items = ObservableBuffer("Food","Drinks")
   var         AddMenuStage : Stage  = null
   private var _menu     : Menu = null
   var         okClicked            = false

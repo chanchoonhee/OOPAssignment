@@ -4,7 +4,7 @@ import scalafxml.core.macros.sfxml
 import scalafx.stage.Stage
 import scalafx.Includes._
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{TextField, PasswordField}
+import scalafx.scene.control.{TextField, PasswordField, Alert}
 
 @sfxml
 class LoginController (
@@ -20,14 +20,25 @@ class LoginController (
   def handleLogin (action: ActionEvent){
     print(userIDField.text.value)
     print(passwordField.text.value)
+    
   if(!userIDField.text.value.equals(null) && !passwordField.text.value.equals(null)){
     if (userIDField.text.value.equals("admin") && passwordField.text.value.equals("abc123")){
       print("Hello World")
       MainApp.showManageMenuPage()
-     
-  }
-  }
-      }
+    } else //error message if wrong input
+    {
+     val alert = new Alert(Alert.AlertType.Error){
+        initOwner(dialogStage)
+        title = "Invalid user ID or Password!"
+        headerText = "Please try again"
+        contentText = "Only a manager can Login"
+      }.showAndWait()
+    
+    }
+  } //end of if checking
+      }//end of method 
+  
+  
   //when cancel is clicked -> lead back to main page
   def handleCancel(action: ActionEvent){
    MainApp.showMainPage()

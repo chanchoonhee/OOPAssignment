@@ -6,7 +6,7 @@ import scalafxml.core.macros.sfxml
 import scalafx.stage.Stage
 import scalafx.Includes._
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{Label,TableColumn}
+import scalafx.scene.control.{Label,TableColumn, TextInputDialog}
 
 @sfxml
 class OrderMenuController {
