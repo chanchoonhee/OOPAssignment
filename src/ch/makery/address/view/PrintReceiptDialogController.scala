@@ -7,6 +7,7 @@ import scalafx.Includes._
 import scalafx.event.ActionEvent
 import scalafx.scene.control.{TextField, TableColumn, TableView, Label, Alert}
 import ch.makery.address.model.{Food, Drinks, Menu}
+import scala.util.control.Exception
 
 @sfxml
 class PrintReceiptDialogController (
@@ -24,6 +25,7 @@ class PrintReceiptDialogController (
   receiptName.cellValueFactory = {_.value.name}
   receiptPrice.cellValueFactory = {_.value.price}
   
+  var paid : Double = 0.00
   var sum : Double = 0.00
   for (items <- MainApp.order){
       sum += items.price.value.toDouble
@@ -36,8 +38,14 @@ class PrintReceiptDialogController (
   var okClicked = false
   
   def handlePrint(action : ActionEvent){ 
+      if (paid <= 0){
+        MainApp.alert("Invalid Amount","Please Enter Correct Amount And Press Enter","Amount Paid Must Be Higher Than Total")
+      }else
+      {
       okClicked = true
       receiptStage.close()
+      MainApp.order.clear()
+      }
     }
     
   def handleCancel(action : ActionEvent){
@@ -45,17 +53,17 @@ class PrintReceiptDialogController (
   }
   
   def countBalance(action : ActionEvent){
-    var paid = paidField.text.value.toDouble
-    
-    if (paid < sum || paid == null){
-      val alert = new Alert(Alert.AlertType.Error){
-        initOwner(dialogStage)
-        title = "Invalid Amount"
-        headerText = "Please Enter Correct Amount"
-        contentText = "Amount Paid Must Be Higher Than Total"
-      }.showAndWait()
-    } else 
+    try
     {
+      paid = paidField.text.value.toDouble
+    }catch {
+    case e: Exception => MainApp.alert("Invalid Entry","Please Enter Numbers Only","Only inputs from 0-9 and '.' is acceptable")
+    paid = 0.00
+    }
+    
+    if (paid < sum && paid != 0){
+      MainApp.alert("Invalid Amount","Please Enter Correct Amount","Amount Paid Must Be Higher Than Total")
+    } else if (paid >= sum){
     var balance = paid - sum
     balanceField.text = (f"$balance%.2f")
     }

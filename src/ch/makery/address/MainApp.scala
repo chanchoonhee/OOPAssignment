@@ -143,6 +143,7 @@ object MainApp extends JFXApp {
         contentText = message
       }.showAndWait()
       }
+     
 			   //call to display MainPage when app start
 			showMainPage()
 

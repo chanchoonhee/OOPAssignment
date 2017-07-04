@@ -24,7 +24,7 @@ class OrderMenuController(
     private val drinksPrice : TableColumn[Drinks, String],
     private val orderTable : TableView[Menu],
     private val orderName : TableColumn[Menu, String],
-    private val orderPrice: TableColumn[Menu, String]
+    private val orderPrice: TableColumn[Menu, String],
     )
     {
   
@@ -35,10 +35,18 @@ class OrderMenuController(
 
   drinksTable.items = MainApp.drinks
   drinksId.cellValueFactory = {_.value.menuId}
-  drinksName.cellValueFactory  = {_.value.name}
+  drinksName.cellValueFactory  = {_.value.name} 
   drinksPrice.cellValueFactory = {_.value.price}
   
-  
+  //to make sure only 1 item is selected the whole time
+  foodTable.selectionModel().selectedItem.onChange(
+          if(foodTable.selectionModel().selectedItem() != null)  
+          drinksTable.selectionModel().clearSelection()
+            )
+      drinksTable.selectionModel().selectedItem.onChange(
+          if(drinksTable.selectionModel().selectedItem() != null)  
+            foodTable.selectionModel().clearSelection()
+            )
   
   def handleBack (action: ActionEvent){
     MainApp.showMainPage
@@ -52,26 +60,17 @@ class OrderMenuController(
     val checkDrinks = drinksTable.selectionModel().selectedIndex.value
     orderTable.items = MainApp.order
     
-    if(checkFood >= 0 && checkDrinks >= 0){
-      foodTable.selectionModel().clearSelection()
-      drinksTable.selectionModel().clearSelection()
       selectedFood = foodTable.selectionModel().selectedItem.value
       selectedDrinks = drinksTable.selectionModel().selectedItem.value
-    } else if (checkFood>= 0 && checkDrinks < 0){
+     if (checkFood>= 0){
         MainApp.order += selectedFood.asInstanceOf[Menu]
         displayOrder()
         foodTable.selectionModel().clearSelection()
-    } else if (checkDrinks >= 0 && checkFood < 0){
+    } else if (checkDrinks >= 0){
         MainApp.order += selectedDrinks.asInstanceOf[Menu]
         displayOrder()
         drinksTable.selectionModel().clearSelection()
     }
-    
-    //to be deleted after finalizing 
-    //MainApp.order += selectedFood.asInstanceOf[Menu]
-    //orderTable.items = MainApp.order
-    //store the selected into the the order table
-    //displayOrder()
     
   }
   
@@ -109,7 +108,7 @@ class OrderMenuController(
   def displayOrder() {
     for(items <- MainApp.order){
       print("\n"+items.name) //can remove when finalized
-      orderName.cellValueFactory = {_.value.name}
+      orderName.cellValueFactory = {_.value.name }  
       orderPrice.cellValueFactory= {_.value.price}
     }
   }

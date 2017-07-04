@@ -53,8 +53,8 @@
                   </Label>
                   <TableView fx:id="orderTable" layoutY="50.0" prefHeight="303.0" prefWidth="280.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                     <columns>
-                      <TableColumn fx:id="orderName" prefWidth="183.0" text="Item" />
-                        <TableColumn fx:id="orderPrice" prefWidth="95.0" text="Price" />
+                      <TableColumn fx:id="orderName" prefWidth="200.0" text="Item" />
+                        <TableColumn fx:id="orderPrice" prefWidth="79.0" text="Price" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
