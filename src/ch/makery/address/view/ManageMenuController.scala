@@ -48,7 +48,16 @@ class ManageMenuController(
       drinksName.cellValueFactory  = {_.value.name}
       drinksPrice.cellValueFactory = {_.value.price}
       drinksType.cellValueFactory = {_.value.drinkType}
-
+      
+      foodTable.selectionModel().selectedItem.onChange(
+          if(foodTable.selectionModel().selectedItem() != null)  
+          drinksTable.selectionModel().clearSelection()
+            )
+      drinksTable.selectionModel().selectedItem.onChange(
+          if(drinksTable.selectionModel().selectedItem() != null)  
+            foodTable.selectionModel().clearSelection()
+            )
+      
 //Handles the add button event
 def handleAddMenu(action : ActionEvent)={
 		val choices = Seq("Food", "Drink")

@@ -51,11 +51,11 @@ def generateFoodID(){
     numbers(value-1) = value
   }
   breakable { for(array <- numbers){
-    i += 1
     if(numbers(i) == 0){
       newValue = i+1
       break
     }
+    i += 1
   } }
   newID = "F" + newValue
   print("NEW ID = " + newID)

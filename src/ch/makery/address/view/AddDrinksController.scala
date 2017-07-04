@@ -7,6 +7,7 @@ import scalafx.Includes._
 import ch.makery.address.model.{Drinks,DrinkDao}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
+import scala.util.control.Breaks._
 
 @sfxml
 class AddDrinksController(
@@ -26,12 +27,38 @@ class AddDrinksController(
 				drinksPriceField.text = MainApp.selectedDrinks.price.value
 				drinkTypeField.text = MainApp.selectedDrinks.drinkType.value
 				drinkTypeField.disable = true
+    }else{
+      generateDrinksID
     }
   def modeAddDrinks(x:Boolean)= x match{
 					  case true =>addDrinks()
 					  case false =>editDrinks()
 					}
-      
+  
+  def generateDrinksID(){
+  var i = 0
+  var value : Int = 0
+  var newValue : Int = 0
+  var newID : String = ""
+  var numbers : Array[Int] = new Array[Int](100)
+  for (items <- MainApp.drinks){
+    value = items.menuId.value.filterNot("D".toSet).toInt
+    print(value)
+    numbers(value-1) = value
+  }
+  breakable { for(array <- numbers){
+    if(numbers(i) == 0){
+      newValue = i+1
+      break
+    }
+    i += 1
+  } }
+  newID = "D" + newValue
+  print("NEW ID = " + newID)
+  drinksIDField.text = newID
+  drinksIDField.disable = true
+}    
+  
 def editDrinks(){
 	   MainApp.selectedDrinks.menuId.value= drinksIDField.text.value
 				MainApp.selectedDrinks.name.value = drinksNameField.text.value

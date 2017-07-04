@@ -23,12 +23,7 @@ class LoginController (
       MainApp.showManageMenuPage()
     } else //error message if wrong input
     {
-     val alert = new Alert(Alert.AlertType.Error){
-        initOwner(dialogStage)
-        title = "Invalid user ID or Password!"
-        headerText = "Please try again"
-        contentText = "Only a manager can Login"
-      }.showAndWait()
+    MainApp.alert("Invalid user ID or Password!","Please try again","Only a manager can Login")
     
     }
   } //end of if checking

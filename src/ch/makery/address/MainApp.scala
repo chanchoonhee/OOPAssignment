@@ -10,6 +10,7 @@ import ch.makery.address.model.{Food,Drinks,DrinkDao,FoodDao, Menu}
 import scalafx.stage.{Stage, Modality}
 import ch.makery.address.view.{PrintReceiptDialogController}
 import ch.makery.address.view.AddFoodController
+import scalafx.scene.control.Alert
 
 
 object MainApp extends JFXApp {
@@ -31,6 +32,7 @@ object MainApp extends JFXApp {
 	    var selectedDrinks : Drinks = null
 	    var fIndex:Int= -1
 	    var dIndex:Int = -1
+      var dialogStage : Stage = null
 
 			// retrieve the root component BorderPane from the FXML 
 			val roots = loader.getRoot[jfxs.layout.BorderPane]
@@ -132,14 +134,16 @@ object MainApp extends JFXApp {
 				dIndex = drinkIndex
 						println(selectedDrinks + " Ok")
 			}
-//      def alert(mTitle:String,message:String) = {new Alert(Alert.AlertType.Error){
-//        initOwner(dialogStage)
-//        title = mTitle
-//        headerText = "Error"
-//        contentText = "Only a manager can Login"
-//      }.showAndWait()
-//      }
-			//   call to display MainPage when app start
+			
+     def alert(mTitle:String,mHeader:String,message:String) = {
+     val alert = new Alert(Alert.AlertType.Error){
+        initOwner(dialogStage)
+        title = mTitle
+        headerText = mHeader
+        contentText = message
+      }.showAndWait()
+      }
+			   //call to display MainPage when app start
 			showMainPage()
 
 }
