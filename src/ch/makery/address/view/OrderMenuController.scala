@@ -45,11 +45,31 @@ class OrderMenuController(
   
   
   def handleAdd (action : ActionEvent){ 
-    val selected = foodTable.selectionModel().selectedItem.value
-    MainApp.order += selected.asInstanceOf[Menu]
+    var selectedFood = foodTable.selectionModel().selectedItem.value
+    var selectedDrinks = drinksTable.selectionModel().selectedItem.value
+    val checkFood = foodTable.selectionModel().selectedIndex.value
+    val checkDrinks = drinksTable.selectionModel().selectedIndex.value
     orderTable.items = MainApp.order
+    
+    if(checkFood >= 0 && checkDrinks >= 0){
+      foodTable.selectionModel().clearSelection()
+      drinksTable.selectionModel().clearSelection()
+      selectedFood = foodTable.selectionModel().selectedItem.value
+      selectedDrinks = drinksTable.selectionModel().selectedItem.value
+    } else if (checkFood>= 0 && checkDrinks < 0){
+        MainApp.order += selectedFood.asInstanceOf[Menu]
+        displayOrder()
+        foodTable.selectionModel().clearSelection()
+    } else if (checkDrinks >= 0 && checkFood < 0){
+        MainApp.order += selectedDrinks.asInstanceOf[Menu]
+        displayOrder()
+        drinksTable.selectionModel().clearSelection()
+    }
+    
+    //MainApp.order += selectedFood.asInstanceOf[Menu]
+    //orderTable.items = MainApp.order
     //store the selected into the the order table
-    displayOrder()
+    //displayOrder()
     
   }
   
@@ -57,6 +77,7 @@ class OrderMenuController(
   def handleDelete (action : ActionEvent){
     val selected = orderTable.selectionModel().selectedItem.value
     orderTable.items().remove(selected)
+    orderTable.selectionModel().clearSelection()
   }
   
   def handleClear (action : ActionEvent) {
