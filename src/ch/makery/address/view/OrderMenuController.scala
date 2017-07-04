@@ -11,6 +11,7 @@ import ch.makery.address.model.{Food, Drinks, Menu}
 
 
 
+
 @sfxml
 class OrderMenuController(
     private val foodTable : TableView[Food],
@@ -66,6 +67,7 @@ class OrderMenuController(
         drinksTable.selectionModel().clearSelection()
     }
     
+    //to be deleted after finalizing 
     //MainApp.order += selectedFood.asInstanceOf[Menu]
     //orderTable.items = MainApp.order
     //store the selected into the the order table
@@ -88,17 +90,25 @@ class OrderMenuController(
   
   
   def handleConfirm (action: ActionEvent){
-    print("\nHello World")
-    //print()
-    //doesnt work yet. Need to show the receipt
-    MainApp.showPrintReceipt
+    print("\nHello World\n")
+    
+    MainApp.showPrintReceipt()
+    
+    //to get sum of the total orders
+    var sum : Double = 0.00
+    for (items <- MainApp.order){
+      sum += items.price.value.toDouble
+    }
+    //to print sum with 2 decimals
+    print(f"$sum%.2f")
+    
   }
   
   
   //method for displaying order
   def displayOrder() {
     for(items <- MainApp.order){
-      print("\n"+items.name)
+      print("\n"+items.name) //can remove when finalized
       orderName.cellValueFactory = {_.value.name}
       orderPrice.cellValueFactory= {_.value.price}
     }

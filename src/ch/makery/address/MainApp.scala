@@ -101,23 +101,21 @@ object MainApp extends JFXApp {
 							this.roots.setCenter(roots)
 			}
 
-			//To be implemented if enough time
-			def showPrintReceipt() = {
-					val resource = getClass.getResourceAsStream("view/PrintReceiptDialog.fxml")
-					val loader = new FXMLLoader(null, NoDependencyResolver)
-					loader.load(resource);
-					val roots2  = loader.getRoot[jfxs.layout.AnchorPane]
-					val control = loader.getController[PrintReceiptDialogController#Controller]
-
-					val dialog = new Stage() {
-						initModality(Modality.APPLICATION_MODAL)
-						initOwner(stage)
-						scene = new Scene {
-							root = roots2
-						}
-					}
-					control.receiptStage = dialog
-							dialog.showAndWait()
+			//to fix - doesn't work yet
+			def showPrintReceipt()={
+			  val resource = getClass.getResourceAsStream("view/PrintReceiptDialog.fxml")
+			  val loader = new FXMLLoader(null, NoDependencyResolver)
+        loader.load(resource);
+        val roots2 = loader.getRoot[jfxs.Parent]
+        //val control = loader.getController[PrintReceiptDialogController#Controller]
+        val dialog = new Stage(){
+          initModality(Modality.APPLICATION_MODAL) //to tell the program it is meant to pop up
+          initOwner(stage)
+          scene = new Scene{
+            root = roots2
+          }
+        }
+        
 			}
 
 
