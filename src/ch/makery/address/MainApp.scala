@@ -8,16 +8,17 @@ import javafx.{scene => jfxs}
 import scalafx.collections.{ObservableBuffer}
 import ch.makery.address.model.{Food,Drinks,DrinkDao,FoodDao, Menu}
 import scalafx.stage.{Stage, Modality}
-import ch.makery.address.view.PrintReceiptDialogController
+import ch.makery.address.view.{PrintReceiptDialogController}
+import ch.makery.address.view.AddFoodController
 
 
 object MainApp extends JFXApp {
 
 	var drinks = new ObservableBuffer[Drinks]()
-			var food = new ObservableBuffer[Food]()
-			var order = new ObservableBuffer[Menu]() 
-			var selectedFood : Food = null
-			var selectedDrinks : Drinks = null
+	var food = new ObservableBuffer[Food]()
+  var order = new ObservableBuffer[Menu]() 
+  
+	
 			DrinkDao.readFromCsv()
 			FoodDao.readFromCsv()
 			// transform path of RootLayout.fxml to URI for resource location.
@@ -26,6 +27,11 @@ object MainApp extends JFXApp {
 			val loader = new FXMLLoader(rootResource, NoDependencyResolver)
 			// Load root layout from fxml file.
 			loader.load();
+	    var selectedFood : Food = null
+	    var selectedDrinks : Drinks = null
+	    var fIndex:Int= -1
+	    var dIndex:Int = -1
+	    
 
 			// retrieve the root component BorderPane from the FXML 
 			val roots = loader.getRoot[jfxs.layout.BorderPane]
@@ -46,6 +52,7 @@ object MainApp extends JFXApp {
 							loader.load();
 					val roots = loader.getRoot[jfxs.layout.AnchorPane]
 							this.roots.setCenter(roots)
+						
 			} 
 
 			//shows the manage menu page
@@ -55,38 +62,41 @@ object MainApp extends JFXApp {
 							loader.load();
 					val roots = loader.getRoot[jfxs.layout.AnchorPane]
 							this.roots.setCenter(roots)
+							
+				
 			}
 
+		
 			//shows the manage menu page
 			def showLoginPage() = {
-					val resource = getClass.getResource("view/Login.fxml")
-							val loader = new FXMLLoader(resource, NoDependencyResolver)
-							loader.load();
-					val roots = loader.getRoot[jfxs.layout.AnchorPane]
-							this.roots.setCenter(roots)
+			val resource = getClass.getResource("view/Login.fxml")
+			val loader = new FXMLLoader(resource, NoDependencyResolver)
+			loader.load();
+			val roots = loader.getRoot[jfxs.layout.AnchorPane]
+			this.roots.setCenter(roots)
 			}
 
 			//shows the order menu
 			def showOrderMenu() = {
-					val resource = getClass.getResource("view/OrderMenu.fxml")
-							val loader = new FXMLLoader(resource, NoDependencyResolver)
-							loader.load();
-					val roots = loader.getRoot[jfxs.layout.AnchorPane]
-							this.roots.setCenter(roots)
+			val resource = getClass.getResource("view/OrderMenu.fxml")
+			val loader = new FXMLLoader(resource, NoDependencyResolver)
+			loader.load();
+			val roots = loader.getRoot[jfxs.layout.AnchorPane]
+			this.roots.setCenter(roots)
 			}
 
 			def showAddFood() = {
 					val resource = getClass.getResource("view/AddFood.fxml")
-							val loader = new FXMLLoader(resource, NoDependencyResolver)
-							loader.load();
+					val loader = new FXMLLoader(resource, NoDependencyResolver)
+					loader.load();
 					val roots = loader.getRoot[jfxs.layout.AnchorPane]
 							this.roots.setCenter(roots)
 			}
 
 			def showAddDrinks() = {
 					val resource = getClass.getResource("view/AddDrink.fxml")
-							val loader = new FXMLLoader(resource, NoDependencyResolver)
-							loader.load();
+					val loader = new FXMLLoader(resource, NoDependencyResolver)
+					loader.load();
 					val roots = loader.getRoot[jfxs.layout.AnchorPane]
 							this.roots.setCenter(roots)
 			}
@@ -94,12 +104,12 @@ object MainApp extends JFXApp {
 			//To be implemented if enough time
 			def showPrintReceipt() = {
 					val resource = getClass.getResourceAsStream("view/PrintReceiptDialog.fxml")
-							val loader = new FXMLLoader(null, NoDependencyResolver)
-							loader.load(resource);
+					val loader = new FXMLLoader(null, NoDependencyResolver)
+					loader.load(resource);
 					val roots2  = loader.getRoot[jfxs.layout.AnchorPane]
-							val control = loader.getController[PrintReceiptDialogController#Controller]
+					val control = loader.getController[PrintReceiptDialogController#Controller]
 
-									val dialog = new Stage() {
+					val dialog = new Stage() {
 						initModality(Modality.APPLICATION_MODAL)
 						initOwner(stage)
 						scene = new Scene {
@@ -111,17 +121,24 @@ object MainApp extends JFXApp {
 			}
 
 
-			def changeSelectedFood(food : Food){
-				selectedFood = food
+			def changeSelectedFood(foodObject : Food,foodIndex:Int){
+				selectedFood = foodObject
+				fIndex = foodIndex
 						println(selectedFood + " Ok")
 			}
 
-			def changeSelectedDrinks(drinks : Drinks){
-				selectedDrinks = drinks
+			def changeSelectedDrinks(drinksObject : Drinks,drinkIndex:Int){
+				selectedDrinks = drinksObject
+				dIndex = drinkIndex
 						println(selectedDrinks + " Ok")
 			}
-
-
+//      def alert(mTitle:String,message:String) = {new Alert(Alert.AlertType.Error){
+//        initOwner(dialogStage)
+//        title = mTitle
+//        headerText = "Error"
+//        contentText = "Only a manager can Login"
+//      }.showAndWait()
+//      }
 			//   call to display MainPage when app start
 			showMainPage()
 

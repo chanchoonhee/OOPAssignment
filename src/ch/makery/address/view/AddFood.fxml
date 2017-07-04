@@ -14,26 +14,10 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="foodIDField" layoutX="200.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0">
-         <font>
-            <Font size="8.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="foodNameField" layoutX="200.0" layoutY="172.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0">
-         <font>
-            <Font size="8.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="foodPriceField" layoutX="200.0" layoutY="214.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0">
-         <font>
-            <Font size="8.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="cuisineField" layoutX="200.0" layoutY="254.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0">
-         <font>
-            <Font size="8.0" />
-         </font>
-      </TextField>
+      <TextField fx:id="foodIDField" layoutX="200.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="foodNameField" layoutX="200.0" layoutY="172.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="foodPriceField" layoutX="200.0" layoutY="214.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="cuisineField" layoutX="200.0" layoutY="254.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" />
       <Text layoutX="107.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID :" wrappingWidth="46.97753190994263">
          <font>
             <Font size="15.0" />
@@ -54,7 +38,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="handleOk" layoutX="400.0" layoutY="310.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="52.0" text="Ok" />
-      <Button fx:id="handleCancel" layoutX="467.0" layoutY="310.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="400.0" layoutY="310.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleOk" prefWidth="52.0" text="Ok" />
+      <Button layoutX="467.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
    </children>
 </AnchorPane>

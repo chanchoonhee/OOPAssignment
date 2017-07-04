@@ -6,7 +6,6 @@ import scalafx.stage.Stage
 import scalafx.Includes._
 import ch.makery.address.model.{Food,FoodDao}
 import scalafx.collections.ObservableBuffer
-
 import scalafx.event.ActionEvent
 
 @sfxml
@@ -16,28 +15,39 @@ class AddFoodController (
 		private val   foodPriceField  : TextField,
 		private val cuisineField  : TextField
 		){
-  var mode : String = "Add"
-	var AddFoodStage : Stage  = null
+  	var AddFoodStage : Stage  = null
 	private var food     : Food = null
-	var         okClicked            = false
-	//checks whether is edit mode and sets it.
-	if(MainApp.selectedFood != null){
-				print(MainApp.selectedFood)
+	var okClicked = false
+
+  //checks whether is edit mode 
+    if (MainApp.selectedFood != null){
+      print(MainApp.selectedFood)
 				foodIDField.text = MainApp.selectedFood.menuId.value
 				foodIDField.disable = true
 				foodNameField.text = MainApp.selectedFood.name.value
 				foodPriceField.text = MainApp.selectedFood.price.value
 				cuisineField.text = MainApp.selectedFood.cuisine.value
 				cuisineField.disable = true
-				mode = "Edit"
-			}
+    }
+      
 
-	
-def handleOk(action :ActionEvent){
- 
-	mode match{
-	case "Add" => {
-	  if (isInputValid()) {
+ def modeAddFood(x:Boolean)= x match{
+					  case true => addFood()
+					  case false =>editFood()
+					}
+
+def editFood(){
+	   MainApp.selectedFood.menuId.value= foodIDField.text.value
+				MainApp.selectedFood.name.value = foodNameField.text.value
+				 MainApp.selectedFood.price.value=foodPriceField.text.value
+				 MainApp.selectedFood.cuisine.value=cuisineField.text.value
+				 MainApp.food.remove(n=MainApp.fIndex,count =1)
+				 MainApp.food+=MainApp.selectedFood
+				 FoodDao.writeToFile()
+				 MainApp.showManageMenuPage
+	}
+	def addFood(){
+   if (isInputValid()) {
 
 		food= new Food(foodIDField.text.value ,foodNameField.text.value ,foodPriceField.text.value.toDouble,cuisineField.text.value)
 				MainApp.food+= food
@@ -46,22 +56,23 @@ def handleOk(action :ActionEvent){
 				MainApp.showManageMenuPage
 
 
-	}
-	}
-	
-	case "Edit" =>
-	  
-	}
-
-	
+	}}
+def handleOk(action : ActionEvent){
+ 		
+	if(MainApp.selectedFood != null){
+				modeAddFood(false)
+			}else{
+			  modeAddFood(true)
+			}
 }
 def handleCancel(action :ActionEvent) {
+  print("Hello")
 	MainApp.selectedFood = null
-			MainApp.selectedDrinks = null
-			MainApp.showManageMenuPage
+	MainApp.selectedDrinks = null
+	MainApp.showManageMenuPage
  
 }
-def nullChecking (x : String) = x == null || x.length == 0
+def nullChecking (x : String) = {x == null || x.length == 0}
 
 def isInputValid() : Boolean = {
 		var errorMessage = ""
@@ -88,6 +99,7 @@ def isInputValid() : Boolean = {
 											return false;
 								}
 }
+
 
 }
 

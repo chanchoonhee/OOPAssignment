@@ -18,12 +18,8 @@ class LoginController (
   
   //to check the login information
   def handleLogin (action: ActionEvent){
-    print(userIDField.text.value)
-    print(passwordField.text.value)
-    
-  if(!userIDField.text.value.equals(null) && !passwordField.text.value.equals(null)){
+    if(!userIDField.text.value.equals(null) && !passwordField.text.value.equals(null)){
     if (userIDField.text.value.equals("admin") && passwordField.text.value.equals("abc123")){
-      print("Hello World")
       MainApp.showManageMenuPage()
     } else //error message if wrong input
     {

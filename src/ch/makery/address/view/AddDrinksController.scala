@@ -15,30 +15,52 @@ class AddDrinksController(
     private val drinksPriceField  : TextField,
     private val drinkTypeField : TextField ){
   
+  
 
   private var drinks     : Drinks = null
-  var okClicked = false
+    if (MainApp.selectedDrinks != null){
+      print(MainApp.selectedFood)
+				drinksIDField.text = MainApp.selectedDrinks.menuId.value
+				drinksIDField.disable = true
+				drinksNameField.text = MainApp.selectedDrinks.name.value
+				drinksPriceField.text = MainApp.selectedDrinks.price.value
+				drinkTypeField.text = MainApp.selectedDrinks.drinkType.value
+				drinkTypeField.disable = true
+    }
+  def modeAddDrinks(x:Boolean)= x match{
+					  case true =>addDrinks()
+					  case false =>editDrinks()
+					}
+      
+def editDrinks(){
+	   MainApp.selectedDrinks.menuId.value= drinksIDField.text.value
+				MainApp.selectedDrinks.name.value = drinksNameField.text.value
+				 MainApp.selectedDrinks.price.value=drinksPriceField.text.value
+				 MainApp.selectedDrinks.drinkType.value=drinkTypeField.text.value
+				 MainApp.drinks.remove(n=MainApp.dIndex,count =1)
+				 MainApp.drinks+=MainApp.selectedDrinks
+				 DrinkDao.writeToFile()
+				 MainApp.showManageMenuPage
+	}
+	def addDrinks(){
+   if (isInputValid()) {
 
-//  def drink = _drinks
-//  def drinks_=(x : Drinks) {
-//        _drinks = x
-//         
-//        drinksIDField.text = _drinks.menuId.value
-//        drinksNameField.text = _drinks.name.value
-//        drinksPriceField.text = _drinks.price.toString
-//        drinkTypeField.text = _drinks.drinkType.value
-//  }
+		drinks= new Drinks(drinksIDField.text.value ,drinksNameField.text.value ,drinksPriceField.text.value.toDouble,drinkTypeField.text.value)
+				MainApp.drinks+= drinks
+				DrinkDao.writeToFile()
+				
+				MainApp.showManageMenuPage
 
+
+	}}
  
   def handleOk(action :ActionEvent){
-
-     if (isInputValid()) {
-       drinks= new Drinks(drinksIDField.text.value ,drinksNameField.text.value ,drinksPriceField.text.value.toDouble,drinkTypeField.text.value)
-       MainApp.drinks+= drinks
-       DrinkDao.writeToFile()
-        okClicked = true
-        MainApp.showManageMenuPage
-    }
+	if(MainApp.selectedDrinks != null){
+				modeAddDrinks(false)
+			}else{
+			  modeAddDrinks(true)
+			}
+ 
   }
    def handleCancel(action :ActionEvent) {
          MainApp.showManageMenuPage

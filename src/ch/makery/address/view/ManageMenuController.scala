@@ -5,8 +5,9 @@ import ch.makery.address.MainApp
 import scalafx.event.ActionEvent
 import scalafx.scene.control.{TableView, TableColumn, Label, Alert, ChoiceDialog}
 import scalafxml.core.macros.sfxml
-import ch.makery.address.model.Food
-import ch.makery.address.model.Drinks
+import ch.makery.address.model.{Food,Menu,Drinks,FoodDao,DrinkDao}
+import scalafx.collections.ObservableBuffer
+
 import scalafx.beans.property.StringProperty
 import scalafx.stage.Window
 
@@ -35,8 +36,7 @@ class ManageMenuController(
 		){
 
 	var choiceDialogStage : Stage = null
-
-
+			//loads the data into the TableView
 			foodTable.items = MainApp.food
 			foodId.cellValueFactory = {_.value.menuId}
       foodName.cellValueFactory  = {_.value.name}
@@ -49,6 +49,7 @@ class ManageMenuController(
       drinksPrice.cellValueFactory = {_.value.price}
       drinksType.cellValueFactory = {_.value.drinkType}
 
+//Handles the add button event
 def handleAddMenu(action : ActionEvent)={
 		val choices = Seq("Food", "Drink")
 				val dialog = new ChoiceDialog(defaultChoice = "Food", choices = choices){
@@ -59,40 +60,49 @@ def handleAddMenu(action : ActionEvent)={
 		}
 
 		val result = dialog.showAndWait()
-
-				result match{
+		result match{
 				case Some("Food") => MainApp.showAddFood
 				case Some("Drink") => MainApp.showAddDrinks
+				case None => 
 		}
 }// end of handleAdd
- 
+
 def handleEditMenu(action : ActionEvent)={
-    val selectedFood = foodTable.selectionModel().selectedItem.value
-    val selectedDrinks = drinksTable.selectionModel().selectedItem.value
-    if(selectedFood !=null){
-      MainApp.changeSelectedFood(selectedFood)
-      MainApp.showAddFood
-    }
-    if(selectedDrinks !=null){
-      MainApp.changeSelectedDrinks(selectedDrinks)
-      MainApp.showAddDrinks
-    }
-  }
+		val selectedFood = foodTable.selectionModel().selectedItem.value
+				val selectedDrinks = drinksTable.selectionModel().selectedItem.value
+				val selectedFoodIndex = foodTable.selectionModel().selectedIndex.value
+				val selectedDrinkIndex = drinksTable.selectionModel().selectedIndex.value
+				if(selectedFood !=null){
+					MainApp.changeSelectedFood(selectedFood,selectedFoodIndex)
+					MainApp.showAddFood
+				}
+		if(selectedDrinks !=null){
+			MainApp.changeSelectedDrinks(selectedDrinks,selectedDrinkIndex)
+			MainApp.showAddDrinks
+		}
+}
 
 def handleDeleteMenu(action : ActionEvent)={
-		val selectedFoodIndex = foodTable.selectionModel().selectedIndex.value
-		val selectedDrinkIndex = drinksTable.selectionModel().selectedIndex.value
-				if (selectedFoodIndex >= 0) {				  
-				  foodTable.items().remove(selectedFoodIndex)
+				val selectedFoodIndex = foodTable.selectionModel().selectedIndex.value
+				val selectedDrinkIndex = drinksTable.selectionModel().selectedIndex.value
+				var deleteBuffer : ObservableBuffer[Menu] = null
+				if (selectedFoodIndex >= 0 && selectedDrinkIndex < 0) {	
+					MainApp.food.remove(n=selectedFoodIndex,count =1)
+					FoodDao.writeToFile()		 
 					foodTable.selectionModel().clearSelection()
-					
-				} 
-			
-				if (selectedDrinkIndex >= 0) {				  
-					drinksTable.items().remove(selectedDrinkIndex)
+
+				} else if (selectedDrinkIndex >= 0 && selectedFoodIndex < 0) {				  
+					MainApp.drinks.remove(n=selectedDrinkIndex,count =1)
+					DrinkDao.writeToFile()	
 					drinksTable.selectionModel().clearSelection()
-				} 
-			
+
+				} else {
+					foodTable.selectionModel().clearSelection()
+					drinksTable.selectionModel().clearSelection()
+				}
+
+
+
 }
 
 def handleCancel(action : ActionEvent)={
