@@ -31,7 +31,6 @@ object MainApp extends JFXApp {
 	    var selectedDrinks : Drinks = null
 	    var fIndex:Int= -1
 	    var dIndex:Int = -1
-	    
 
 			// retrieve the root component BorderPane from the FXML 
 			val roots = loader.getRoot[jfxs.layout.BorderPane]
@@ -45,6 +44,7 @@ object MainApp extends JFXApp {
 
 				}
 			}
+
 			// actions for display Main page window 
 			def showMainPage() = {
 					val resource = getClass.getResource("view/MainPage.fxml")

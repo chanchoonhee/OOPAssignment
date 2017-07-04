@@ -60,10 +60,13 @@ def editDrinks(){
 			}else{
 			  modeAddDrinks(true)
 			}
- 
+ 		MainApp.selectedDrinks = null
+ 		MainApp.selectedFood = null
   }
    def handleCancel(action :ActionEvent) {
-         MainApp.showManageMenuPage
+     MainApp.selectedDrinks = null
+     MainApp.selectedFood = null
+     MainApp.showManageMenuPage
   }
   def nullChecking (x : String) = x == null || x.length == 0
 

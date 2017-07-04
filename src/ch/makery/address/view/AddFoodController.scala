@@ -1,4 +1,5 @@
 package ch.makery.address.view
+import java.io._
 import ch.makery.address.MainApp
 import scalafx.scene.control.{TextField, TableColumn, Label, Alert}
 import scalafxml.core.macros.sfxml
@@ -7,6 +8,7 @@ import scalafx.Includes._
 import ch.makery.address.model.{Food,FoodDao}
 import scalafx.collections.ObservableBuffer
 import scalafx.event.ActionEvent
+import scala.util.control.Breaks._
 
 @sfxml
 class AddFoodController (
@@ -28,6 +30,8 @@ class AddFoodController (
 				foodPriceField.text = MainApp.selectedFood.price.value
 				cuisineField.text = MainApp.selectedFood.cuisine.value
 				cuisineField.disable = true
+    }else{
+      generateFoodID
     }
       
 
@@ -36,6 +40,29 @@ class AddFoodController (
 					  case false =>editFood()
 					}
 
+def generateFoodID(){
+  var i = 0
+  var value : Int = 0
+  var newValue : Int = 0
+  var newID : String = ""
+  var numbers : Array[Int] = new Array[Int](100)
+  for (items <- MainApp.food){
+    value = items.menuId.value.filterNot("F".toSet).toInt
+    numbers(value-1) = value
+  }
+  breakable { for(array <- numbers){
+    i += 1
+    if(numbers(i) == 0){
+      newValue = i+1
+      break
+    }
+  } }
+  newID = "F" + newValue
+  print("NEW ID = " + newID)
+  foodIDField.text = newID
+  foodIDField.disable = true
+}
+ 
 def editFood(){
 	   MainApp.selectedFood.menuId.value= foodIDField.text.value
 				MainApp.selectedFood.name.value = foodNameField.text.value
@@ -46,6 +73,7 @@ def editFood(){
 				 FoodDao.writeToFile()
 				 MainApp.showManageMenuPage
 	}
+
 	def addFood(){
    if (isInputValid()) {
 
@@ -64,9 +92,10 @@ def handleOk(action : ActionEvent){
 			}else{
 			  modeAddFood(true)
 			}
+	MainApp.selectedFood = null
+	MainApp.selectedDrinks = null
 }
 def handleCancel(action :ActionEvent) {
-  print("Hello")
 	MainApp.selectedFood = null
 	MainApp.selectedDrinks = null
 	MainApp.showManageMenuPage
