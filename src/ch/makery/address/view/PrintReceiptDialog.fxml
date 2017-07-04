@@ -53,8 +53,8 @@
                         <Label text="Paid : " GridPane.rowIndex="1" />
                         <Label text="Balance : " GridPane.rowIndex="2" />
                         <Label fx:id="totalLabel" text="Label" GridPane.columnIndex="1" />
-                        <TextField promptText="Amount Paid" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField editable="false" promptText="Balance" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="paidField" onAction="#countBalance" promptText="Amount Paid" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="balanceField" editable="false" promptText="Balance" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" layoutX="117.0" layoutY="116.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

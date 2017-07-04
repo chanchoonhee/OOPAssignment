@@ -107,7 +107,7 @@ object MainApp extends JFXApp {
 			  val loader = new FXMLLoader(null, NoDependencyResolver)
         loader.load(resource);
         val roots2 = loader.getRoot[jfxs.Parent]
-        //val control = loader.getController[PrintReceiptDialogController#Controller]
+        val control = loader.getController[PrintReceiptDialogController#Controller]
         val dialog = new Stage(){
           initModality(Modality.APPLICATION_MODAL) //to tell the program it is meant to pop up
           initOwner(stage)
@@ -115,8 +115,10 @@ object MainApp extends JFXApp {
             root = roots2
           }
         }
-        
-			}
+        control.receiptStage = dialog
+        dialog.showAndWait()
+        control.okClicked
+  			}
 
 
 			def changeSelectedFood(foodObject : Food,foodIndex:Int){
