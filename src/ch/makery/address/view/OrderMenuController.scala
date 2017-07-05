@@ -89,7 +89,6 @@ class OrderMenuController(
   
   
   def handleConfirm (action: ActionEvent){
-    print("\nHello World\n")
     
     MainApp.showPrintReceipt()
     
@@ -99,7 +98,7 @@ class OrderMenuController(
       sum += items.price.value.toDouble
     }
     //to print sum with 2 decimals
-    print(f"$sum%.2f")
+    //print(f"$sum%.2f")
     
   }
   
@@ -107,7 +106,6 @@ class OrderMenuController(
   //method for displaying order
   def displayOrder() {
     for(items <- MainApp.order){
-      print("\n"+items.name) //can remove when finalized
       orderName.cellValueFactory = {_.value.name }  
       orderPrice.cellValueFactory= {_.value.price}
     }

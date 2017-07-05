@@ -36,15 +36,19 @@ class PrintReceiptDialogController (
   var dialogStage : Stage = null
   var receiptStage : Stage  = null
   var okClicked = false
+  var balance : Double = 0.00
   
+  //to add print function
   def handlePrint(action : ActionEvent){ 
       if (paid <= 0){
         MainApp.alert("Invalid Amount","Please Enter Correct Amount And Press Enter","Amount Paid Must Be Higher Than Total")
       }else
       {
-      okClicked = true
-      receiptStage.close()
-      MainApp.order.clear()
+        //print the receipt to the console
+        printReceipt()
+        okClicked = true
+        receiptStage.close()
+        MainApp.order.clear()
       }
     }
     
@@ -64,9 +68,28 @@ class PrintReceiptDialogController (
     if (paid < sum && paid != 0){
       MainApp.alert("Invalid Amount","Please Enter Correct Amount","Amount Paid Must Be Higher Than Total")
     } else if (paid >= sum){
-    var balance = paid - sum
+     balance = paid - sum
     balanceField.text = (f"$balance%.2f")
     }
+  }
+  
+  val spaces = " "
+  def printReceipt(){
+    print("-------------------------------------------\n")
+    for (items <- MainApp.order){
+      print(items.name.value)
+      for (a<- items.name.value.length to 35){
+        print(spaces)
+      }
+      print(items.price.value+"\n")
+    }
+    print("-------------------------------------------\n")
+    print(f"Total                               $sum%.2f\n")
+    print(f"Paid                                $paid%.2f\n")
+    print(f"Balance                             $balance%.2f\n")
+    print("-------------------------------------------")
+        
+    
   }
     
     
