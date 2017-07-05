@@ -22,6 +22,7 @@ class OrderMenuController(
     private val drinksId : TableColumn[Drinks, String],
     private val drinksName : TableColumn[Drinks, String],
     private val drinksPrice : TableColumn[Drinks, String],
+    private val drinksType : TableColumn[Drinks,String],
     private val orderTable : TableView[Menu],
     private val orderName : TableColumn[Menu, String],
     private val orderPrice: TableColumn[Menu, String],
@@ -37,6 +38,7 @@ class OrderMenuController(
   drinksId.cellValueFactory = {_.value.menuId}
   drinksName.cellValueFactory  = {_.value.name} 
   drinksPrice.cellValueFactory = {_.value.price}
+  drinksType.cellValueFactory = {_.value.drinkType}
   
   //to make sure only 1 item is selected the whole time
   foodTable.selectionModel().selectedItem.onChange(
