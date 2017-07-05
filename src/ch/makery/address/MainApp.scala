@@ -11,7 +11,7 @@ import scalafx.stage.{Stage, Modality}
 import ch.makery.address.view.{PrintReceiptDialogController}
 import ch.makery.address.view.AddFoodController
 import scalafx.scene.control.Alert
-
+import scala.util.control.Exception
 
 object MainApp extends JFXApp {
 
@@ -144,6 +144,13 @@ object MainApp extends JFXApp {
       }.showAndWait()
       }
      
+     def isDouble(stringToCheck:String): Boolean ={
+        try{
+          stringToCheck.toDouble
+        } catch{case e: Exception => return false
+        }
+        return true
+     }
 			   //call to display MainPage when app start
 			showMainPage()
 

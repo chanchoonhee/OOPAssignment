@@ -33,7 +33,6 @@ class AddFoodController (
     }else{
       generateFoodID
     }
-      
 
  def modeAddFood(x:Boolean)= x match{
 					  case true => addFood()
@@ -64,6 +63,8 @@ def generateFoodID(){
 }
  
 def editFood(){
+  print("\nEDIT")
+  if (isInputValid()) {
 	   MainApp.selectedFood.menuId.value= foodIDField.text.value
 				MainApp.selectedFood.name.value = foodNameField.text.value
 				 MainApp.selectedFood.price.value=foodPriceField.text.value
@@ -71,29 +72,36 @@ def editFood(){
 				 MainApp.food.remove(n=MainApp.fIndex,count =1)
 				 MainApp.food+=MainApp.selectedFood
 				 FoodDao.writeToFile()
-				 MainApp.showManageMenuPage
+				 
+	MainApp.selectedFood = null
+	MainApp.selectedDrinks = null
+				 MainApp.showManageMenuPage}
 	}
 
-	def addFood(){
-   if (isInputValid()) {
 
+    
+    
+	def addFood(){
+	  print("\nADD")
+   if (isInputValid()) {
+   print("SUCCCSSS")
 		food= new Food(foodIDField.text.value ,foodNameField.text.value ,foodPriceField.text.value.toDouble,cuisineField.text.value)
 				MainApp.food+= food
 				FoodDao.writeToFile()
 				okClicked = true
+				
+	MainApp.selectedFood = null
+	MainApp.selectedDrinks = null
 				MainApp.showManageMenuPage
 
 
 	}}
 def handleOk(action : ActionEvent){
- 		
 	if(MainApp.selectedFood != null){
 				modeAddFood(false)
 			}else{
 			  modeAddFood(true)
 			}
-	MainApp.selectedFood = null
-	MainApp.selectedDrinks = null
 }
 def handleCancel(action :ActionEvent) {
 	MainApp.selectedFood = null
@@ -104,28 +112,43 @@ def handleCancel(action :ActionEvent) {
 def nullChecking (x : String) = {x == null || x.length == 0}
 
 def isInputValid() : Boolean = {
-		var errorMessage = ""
-
+  print("\nIMCHECKEDDD\n")
+	var errorMessage = ""
 				if (nullChecking(foodIDField.text.value))
 					errorMessage += "No valid ID!\n"
 					if (nullChecking(foodNameField.text.value))
 						errorMessage += "No valid name!\n"
-						if (nullChecking(foodPriceField.text.toString))
+						else
+						  for(items <- MainApp.food){
+						  print("\nchecked 1")
+						  if(MainApp.selectedFood != null){
+							    if(foodNameField.text.value.equalsIgnoreCase(MainApp.selectedFood.name.value)){
+							      print("\ndo nothing")
+							    }
+							    else if(foodNameField.text.value.equalsIgnoreCase(items.name.value)){
+							        print("\ncheched 3")
+                          errorMessage += "Food Name Already Exist!\n"
+                          }
+                                  
+							    
+							  }else
+						    if(foodNameField.text.value.equalsIgnoreCase(items.name.value)){
+							        print("\ncheched 3")
+                          errorMessage += "Food Name Already Exist!\n"
+                          }
+						  }
+						if (nullChecking(foodPriceField.text.value))
 							errorMessage += "No valid price!\n"
+            else if(MainApp.isDouble(foodPriceField.text.value.toString) == false)
+								  errorMessage += "No valid price!\n"
 							if (nullChecking(cuisineField.text.value))
 								errorMessage += "No valid cuisine!\n"
 								if (errorMessage.length() == 0) {
 									return true;
 								} else {
 									// Show the error message.
-									val alert = new Alert(Alert.AlertType.Error){
-										initOwner(AddFoodStage)
-										title = "Invalid Fields"
-										headerText = "Please correct invalid fields"
-										contentText = errorMessage
-									}.showAndWait()
-
-											return false;
+								  MainApp.alert("Invalid Fields", "Please correct invalid fields", errorMessage)
+									return false;
 								}
 }
 
